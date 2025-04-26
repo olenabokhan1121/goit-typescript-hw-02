@@ -1,7 +1,9 @@
 import css from './SearchBar.module.css';
 import { Field, Form, Formik } from 'formik';
-
-export default function SearchBar({ onSearch }) {
+interface SearchBarProps {
+  onSearch: (topic: string) => void;
+}
+export default function SearchBar({ onSearch }: SearchBarProps) {
   return (
     <Formik
       initialValues={{

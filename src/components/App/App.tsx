@@ -7,20 +7,24 @@ import LoadMoreBtn from '../LoadMoreBtn/LoadMoreBtn';
 import ImageModal from '../ImageModal/ImageModal';
 import toast, { Toaster } from 'react-hot-toast';
 import ClipLoader from 'react-spinners/ClipLoader';
+import { ImageData } from '../../types';
 function App() {
-  const [images, setImages] = useState([]);
-  const [page, setPage] = useState(1);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const galleryRef = useRef(null); //  Створюємо реф для галереї
+  const [images, setImages] = useState<ImageData[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [selectedImage, setSelectedImage] = useState<Pick<
+    ImageData,
+    'description' | 'imageModalUrl'
+  > | null>(null);
+  const galleryRef = useRef<HTMLDivElement>(null); //  Створюємо реф для галереї
 
   const handleLoadMoreClick = () => {
     setPage(prevPage => prevPage + 1);
   };
-  const openModal = image => {
+  const openModal = (image: ImageData) => {
     setSelectedImage(image);
     setIsModalOpen(true);
   };
@@ -28,7 +32,7 @@ function App() {
     setIsModalOpen(false);
     setSelectedImage(null);
   };
-  const handleSearch = topic => {
+  const handleSearch = (topic: string) => {
     if (!topic.trim()) {
       toast.error('Будь ласка, введіть текст для пошуку!');
       return;

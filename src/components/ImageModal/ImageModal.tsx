@@ -2,8 +2,18 @@ import Modal from 'react-modal';
 import css from './ImageModal.module.css';
 
 Modal.setAppElement('#root'); // Додаємо для доступності
-
-export default function ImageModal({ isOpen, closeModal, imageUrl, imageAlt }) {
+interface ImageModalProps {
+  isOpen: boolean;
+  closeModal: () => void;
+  imageUrl: string;
+  imageAlt: string;
+}
+export default function ImageModal({
+  isOpen,
+  closeModal,
+  imageUrl,
+  imageAlt,
+}: ImageModalProps) {
   return (
     <Modal
       isOpen={isOpen}

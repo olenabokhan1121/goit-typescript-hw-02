@@ -1,6 +1,14 @@
 import css from './ImageGallery.module.css';
 import ImageCard from '../ImageCard/ImageCard';
-export default function ImageGallery({ items, onImageClick }) {
+import { ImageData } from '../../types';
+interface ImageGalleryProps {
+  items: ImageData[];
+  onImageClick: (image: ImageData) => void;
+}
+export default function ImageGallery({
+  items,
+  onImageClick,
+}: ImageGalleryProps) {
   return (
     <ul className={css.list}>
       {items.map(item => (
